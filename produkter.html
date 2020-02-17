@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produkter</title>
+    <link rel="stylesheet" href="detalje.css">
+
+    <style>
+        h2 {
+            font-size: 1.2rem;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        img {
+            object-fit: contain;
+            max-width: 100%;
+        }
+
+
+        #container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-column-gap: 20px;
+            grid-row-gap: 20px;
+            padding-bottom: 50px;
+        }
+
+        .sneaker {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10px 15px 10px;
+            transition: .3s;
+            cursor: pointer;
+            border: 2px solid #333;
+            height: 450px;
+        }
+
+        .sneaker p,
+        .sneaker h2,
+        .sneaker img {
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        #oversigt {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: 50px;
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        button:focus {
+            outline: 0;
+        }
+
+        /* FILTER-MENU */
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: #fff;
+            color: #000;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content .filter,
+        .dropdown-content .sorter {
+            color: black;
+            width: 100%;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            background-color: #fff;
+            border: none;
+            border-bottom: 1px inset #333;
+
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content button:hover {
+            background-color: #ddd;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            color: #414141;
+        }
+
+        .valgt {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff !important;
+            background-color: #333 !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <section id="oversigt">
+        <div class="dropdown">
+            <button class="dropbtn">Filtrer efter &#9662;</button>
+            <div class="dropdown-content">
+                <button class="filter valgt" data-brand="alle">Alle</button>
+                <button class="filter" data-brand="Adidas">Adidas</button>
+                <button class="filter" data-brand="New Balance">New Balance</button>
+                <button class="filter" data-brand="Nike">Nike</button>
+                <button class="filter" data-brand="Puma">Puma</button>
+                <button class="filter" data-brand="Reebok">Reebok</button>
+            </div>
+        </div>
+
+
+        <div class="dropdown">
+            <button class="dropbtn sortering">Sorter efter &#9662;</button>
+            <div class="dropdown-content">
+                <button class="sorter" data-pris="lav">Pris: laveste først</button>
+                <button class="sorter" data-pris="høj">Pris: højeste først</button>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+    <section id="container"></section>
+
+    <template>
+        <article id="" class="sneaker">
+            <img src="" alt="">
+            <h2></h2>
+            <p></p>
+            <p>Pris: </p>
+        </article>
+    </template>
+
+    <script>
+        //Vi definerer et endpoint som er vores Google Sheet aka JSON-fil
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1ZPVcO_A1ALH2vKozmQvf5pL-lqHAhTAFL8d3Hz9ifec/od6/public/values?alt=json";
+
+        //Der defineres variabler til vores filtrerings & sorteringsmuligheder
+        const filterKnap = document.querySelectorAll(".filter");
+        const sorterKnap = document.querySelectorAll(".sorter");
+
+
+        let brand = "alle"; //Brand defineres som variabel og sættes som udgangspunkt = "alle"
+        let sorterPris; //sorterPris defineres uden værdi, da den får det senere
+        let sorterTekst = document.querySelector(".sortering"); //sorterTekst bruges til at fortælle brugeren hvad de lige nu sorterer efter
+
+        let sneakers = []; //sneakers defineres som et tomt array den skal indeholde alle objekterne fra JSON-filen
+
+        //Når alle elementer i DOM'en er loadet, så skal funktionen "start" igangsættes
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            hentData(); //Vi kalder funktionen hentData, så vi kan skaffe objekterne fra JSON-filen
+
+            //for hver filtreringsmulig skal der laves en eventlistener der udløser funktionen "filtrering"
+            filterKnap.forEach(knap => {
+                knap.addEventListener("click", filtrering);
+            });
+
+            //for hver sorteringsmulighed skal der laves en eventlistener der udløser funktionen "sortering"
+            sorterKnap.forEach(knap => {
+                knap.addEventListener("click", sortering);
+            });
+        }
+
+        //Der laves en async funktion til at skaffe dataen fra JSON-filen
+        async function hentData() {
+            const response = await fetch(endpoint); //variablen "response" defineres og skal hente dataen fra endpoint-URL'en
+            sneakers = await response.json(); //sneakers-array får dataen i response fra JSON-filen
+            console.log(sneakers);
+            visSneakers(); //funktionen "visSneakers" kaldes
+        }
+
+        //Når man klikker på en filtreringsmulighed sendes man til denne funktion
+        function filtrering() {
+            //For hver knap til filtrering fjernes classen "valgt"
+            filterKnap.forEach(knap => {
+                knap.classList.remove("valgt");
+            });
+
+            this.classList.add("valgt"); //Den trykkede knap får tildelt klassen "valgt"
+            brand = this.dataset.brand; //Variablen brand sættes = dataen fra den trykkede knap
+            console.log(brand);
+            visSneakers(); //funktionen "visSneakers" kaldes
+
+        }
+
+        //Når man klikker på en sorteringsmulighed sendes man til denne funktion
+        function sortering() {
+            //For hver knap til filtrering fjernes classen "valgt"
+            sorterKnap.forEach(knap => {
+                knap.classList.remove("valgt");
+            });
+            this.classList.add("valgt"); //Den trykkede knap får tildelt klassen "valgt"
+            sorterPris = this.dataset.pris; //Variablen sorterPris sættes = dataen fra den trykkede knap
+            sorterTekst.textContent = "Sorter efter: " + sorterPris; //sorterTekst giver brugeren besked om der sorteres efter høj eller lav
+
+            //Hvis sorterPris er lav, så sorterer vi numerisk på den enkelte skos pris i stigende rækkefølge
+            if (sorterPris == "lav") {
+                //Der gøres brug af array-funktionen "sort" & en "compare"-funktion
+                sneakers.feed.entry.sort(function(a, b) {
+                    //Compare-funktionen inddeler array-elementerne delvist i "a" og "b"
+                    //Derefter trækkes b-elementets værdi fra a
+                    //Hvis tallet er negativt, sorteres a-elementet frem i array-index
+                    return a.gsx$pris.$t - b.gsx$pris.$t;
+                });
+
+                //Hvis sorterPris IKKE er lav, så sorterer vi numerisk på den enkelte skos pris i faldende rækkefølge
+            } else {
+                //Der gøres brug af array-funktionen "sort" & en "compare"-funktion
+                sneakers.feed.entry.sort(function(a, b) {
+                    //Compare-funktionen inddeler array-elementerne delvist i "a" og "b"
+                    //Derefter trækkes a-elementets værdi fra b
+                    //Hvis tallet er positivt, sorteres b-elementet frem i array-index
+                    return b.gsx$pris.$t - a.gsx$pris.$t;
+                });
+            }
+            console.log(sneakers);
+            visSneakers(); //funktionen "visSneakers" kaldes
+        }
+
+
+        //visSneakers bruges til at vise alle skoene i deres særskildte article
+        function visSneakers() {
+            //vi definerer container & sneakerTemplate, der fortæller hvor elementerne skal hen og hvor udgangspunktet er
+            let container = document.querySelector("#container");
+            let sneakerTemplate = document.querySelector("template");
+
+            container.innerHTML = ""; //Vi fjerner alt indhold i container
+
+            //hvert objekt i array'et "sneakers" kaldes sko & viser forskellige sko-properties i en article
+            sneakers.feed.entry.forEach(sko => {
+                //Som udgangspunkt viser vi alle brands sko - inden en filtrering er sket
+                //Hvis en filtrering er sket, så spørger vi om sko-objektets "brand"-property er det samme som den valgte filteringsmulighed
+                //Er en filtering sket, så klones der kun antallet af sko i det valgte brand
+                if (brand == "alle" || sko.gsx$brand.$t == brand) {
+                    //Variablen "klon" defineres til at lave article-kloner baseret på antallet af objekter
+                    let klon = sneakerTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand og navn vises i h2-tag
+                    klon.querySelector("img").src = sko.gsx$billede.$t; //skoens billede angives som source til img-tag
+                    klon.querySelector("p").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
+                    klon.querySelector("p:last-child").textContent += sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
+
+                    //for hver klon skal der laves en eventlistener der udløser en anonym-funktion
+                    klon.querySelector(".sneaker").addEventListener("click", () => {
+                        //URL'en erstattes med "detalje.html?id=" OG sko-ID, da dette er unikt
+                        location.href = `detalje.html?id=${sko.gsx$id.$t}`;
+                    });
+
+                    //Alle de klonede elementer vises i container / produkt-grid
+                    container.appendChild(klon);
+                }
+            });
+
+        }
+
+    </script>
+</body>
+
+</html>
