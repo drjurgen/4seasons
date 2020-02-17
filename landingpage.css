@@ -1,0 +1,89 @@
+/********************* Generelle indstillinger *********************/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+
+#landingpage {
+    height: 100vh;
+    width: 100vw;
+}
+
+h1 {
+    font-size: 5rem;
+    color: #fff;
+}
+
+/********************* Generelle indstillinger slut *********************/
+
+
+/********************* Header *********************/
+header {
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+}
+
+nav {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+}
+
+nav a {
+    padding-right: 20px;
+    text-decoration: none;
+    color: black;
+    padding: 40px;
+}
+
+/********************* Header slut *********************/
+
+
+
+/********************* Content *********************/
+.sectionwrapper {
+    height: 100%;
+    width: 100%;
+
+    background-position: 65%;
+    background-repeat: no-repeat;
+    background-image: url(https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80);
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container h1 {
+    margin-top: 200px;
+}
+
+.container a {
+    height: 50px;
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+}
+
+/********************* Content Slut *********************/
