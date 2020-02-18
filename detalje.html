@@ -13,6 +13,7 @@
 <body>
     <header>
         <nav>
+            <a href="index.html">Forside</a>
             <a href="produkter.html">Produkter</a>
             <a href="#">Om</a>
             <a href="#">Kontakt</a>
@@ -28,7 +29,7 @@
                 <h1></h1>
                 <p></p>
                 <p></p><br>
-                <p>Tilgængelige størrelser</p>
+                <p></p>
 
                 <section id="sizes"></section>
                 <template>
@@ -79,6 +80,7 @@
                     detalje.querySelector("h1").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand og navn vises i h1-tag
                     detalje.querySelector("p").textContent = sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
                     detalje.querySelector("p + p").textContent = sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
+                    detalje.querySelector("p + p + br + p").textContent = "Tilgængelige størrelser:"; //
                     detalje.querySelector("img").src = sko.gsx$billede.$t; //skoens billede angives som source til img-tag
                     detalje.querySelector("img").alt = "Sneaker: " + sko.gsx$navn.$t; //alt-teksten til billedet angives som skoens navn
 
