@@ -8,8 +8,8 @@ body {
 }
 
 img {
-    object-fit: cover;
-    max-width: 70%;
+    object-fit: contain;
+    max-width: 100%;
 }
 
 p {
@@ -28,6 +28,10 @@ button:focus {
     height: 100%;
     left: 0;
     top: 0;
+}
+
+#detalje img {
+    max-width: 70%;
 }
 
 #sneaker_detalje {
@@ -105,4 +109,27 @@ nav a {
     text-decoration: none;
     color: black;
     padding: 40px;
+}
+
+nav a:first-child {
+    align-self: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    transition: .3s;
+}
+
+nav a:first-child img {
+    height: 50px;
+    width: 130px;
+    position: absolute;
+    left: 10px;
+    top: 22px;
+    z-index: 10;
+    background-color: #fff;
+}
+
+nav a:first-child:hover {
+    transform: scale(1.04);
 }

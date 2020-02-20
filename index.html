@@ -10,38 +10,59 @@
 
 <body>
     <section id="landingpage">
+        <header>
+            <nav>
+                <a href="index.html">
+                    <img src="logo.svg" alt="">
+                </a>
+
+                <a href="produkter.html">Produkter</a>
+                <a href="#">Om</a>
+                <a href="#">Kontakt</a>
+            </nav>
+        </header>
+
         <div class="sectionwrapper">
-
-            <header>
-                <nav>
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="logo.svg" alt="">
-                        </a>
-                    </div>
-
-                    <a href="produkter.html">Produkter</a>
-                    <a href="#">Om</a>
-                    <a href="#">Kontakt</a>
-                </nav>
-            </header>
-
-
             <div class="container">
-
-
                 <h1></h1>
-
                 <a href="produkter.html">SE PRODUKTER</a>
-
             </div>
-
         </div>
     </section>
 
 
+    <script>
+        const picture = document.querySelector(".sectionwrapper");
+        let slideCounter = 0;
 
-    <script src=""></script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("start");
+            slideChange();
+        }
+
+        function slideChange() {
+            slideCounter = slideCounter + 1;
+            picture.style.backgroundImage = "url(imgs/imageslide/slide" + slideCounter + ".jpg)";
+            picture.classList.add("show");
+            console.log(slideCounter);
+
+            if (slideCounter == 8) {
+                slideCounter = 0;
+            }
+
+            setTimeout(function() {
+                picture.classList.remove("show");
+            }, 2000);
+
+            setTimeout(function() {
+                slideChange();
+            }, 3000);
+
+        }
+
+    </script>
 </body>
 
 </html>
