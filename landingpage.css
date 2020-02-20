@@ -6,6 +6,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
+    background-color: antiquewhite;
 }
 
 
@@ -58,8 +59,9 @@ nav a {
 
     /*    background-position: 65%;*/
     background-repeat: no-repeat;
-    background-image: url(landing.png);
-
+    background-image: url(landing4.jpg);
+    background-size: cover;
+    background-position: center
 }
 
 
