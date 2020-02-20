@@ -47,6 +47,27 @@ nav a {
     padding: 40px;
 }
 
+nav a:first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+nav a:first-child img {
+    height: 65px;
+    width: 130px;
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+
+.logo {
+    width: 100%;
+    flex-basis: 200px;
+    text-align: center;
+    padding: 0.5rem;
+}
+
 /********************* Header slut *********************/
 
 

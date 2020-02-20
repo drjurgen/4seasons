@@ -166,7 +166,7 @@
                     //Variablen "klon" defineres til at lave article-kloner baseret på antallet af objekter
                     let klon = sneakerTemplate.cloneNode(true).content;
                     klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand og navn vises i h2-tag
-                    klon.querySelector("img").src = sko.gsx$billede.$t; //skoens billede angives som source til img-tag
+                    klon.querySelector("img").src = `imgs/small/${sko.gsx$billede.$t}-sm.jpg`; //skoens billede angives som source til img-tag
                     klon.querySelector("p").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
                     klon.querySelector("p:last-child").textContent += sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
 
@@ -182,5 +182,8 @@
             });
 
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
