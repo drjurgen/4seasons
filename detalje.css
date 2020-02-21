@@ -22,12 +22,83 @@ button:focus {
 }
 
 #detalje {
-    overflow: scroll;
     position: fixed;
     width: 100vw;
     height: 100%;
+    top: 100px;
     left: 0;
-    top: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+}
+
+#detalje .detalje-sko {
+    background-size: cover;
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+    bottom: 75px;
+}
+
+#detalje .detalje-sko .sko-navn {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: #fff;
+    color: #000;
+    font-size: 4vw;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+    height: 40%;
+    text-align: center;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+}
+
+#detalje .detalje-sko .sko-navn h1,
+#detalje .detalje-sko .sko-navn h2 {
+    margin: 0;
+}
+
+#detalje .detalje-sko .sko-navn h1 {
+    text-align: center;
+    position: relative;
+    top: 31%;
+    text-transform: uppercase;
+}
+
+#detalje .detalje-sko .sko-navn h2 {
+    text-align: center;
+    position: relative;
+    top: 30%;
+    font-size: 4vw;
+    text-transform: uppercase;
+    max-width: 100%;
+}
+
+#detalje .beskrivelse {
+    justify-content: center;
+    place-self: center;
+
+    max-width: 500px;
+}
+
+#detalje .beskrivelse .txt p:nth-child(2) {
+    margin-bottom: 10px;
+}
+
+#detalje .beskrivelse .txt p:nth-child(3) {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 0 14px 0;
 }
 
 #detalje img {
@@ -61,10 +132,10 @@ button:focus {
 
 #sizes {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 4fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 4fr));
     grid-column-gap: 5px;
     grid-row-gap: 5px;
-    max-width: 250px;
+    max-width: 500px;
 }
 
 .size {
@@ -79,9 +150,25 @@ button:focus {
     transition: .3s;
 }
 
-.size:hover {
+.size:hover,
+.buy:hover {
     background-color: #fff;
     color: #333;
+}
+
+.buy {
+    border: none;
+    padding: 16px 12px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    margin-right: 10px;
+    margin-top: 100px;
+    transition: .3s;
+    width: 100%;
+    font-size: 12px;
 }
 
 
