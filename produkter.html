@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produkter</title>
     <link rel="stylesheet" href="produkter.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -15,7 +17,17 @@
             <a href="index.html">
                 <img src="logo.svg" alt="">
             </a>
-            <a href="produkter.html">Produkter</a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Produkter &#9662;</button>
+                <div class="dropdown-content">
+                    <button class="gender valgt" data-køn="alle">Alle</button>
+                    <button class="gender" data-køn="m">Mænd</button>
+                    <button class="gender" data-køn="k">Kvinder</button>
+                </div>
+            </div>
+
+
             <a href="#">Om</a>
             <a href="#">Kontakt</a>
 
@@ -69,11 +81,13 @@
         //Der defineres variabler til vores filtrerings & sorteringsmuligheder
         const filterKnap = document.querySelectorAll(".filter");
         const sorterKnap = document.querySelectorAll(".sorter");
+        const kønKnap = document.querySelectorAll(".gender");
 
 
         let brand = "alle"; //Brand defineres som variabel og sættes som udgangspunkt = "alle"
         let sorterPris; //sorterPris defineres uden værdi, da den får det senere
         let sorterTekst = document.querySelector(".sortering"); //sorterTekst bruges til at fortælle brugeren hvad de lige nu sorterer efter
+        let køn = "alle";
 
         let sneakers = []; //sneakers defineres som et tomt array den skal indeholde alle objekterne fra JSON-filen
 
@@ -92,6 +106,11 @@
             sorterKnap.forEach(knap => {
                 knap.addEventListener("click", sortering);
             });
+
+            //for hver sorteringsmulighed skal der laves en eventlistener der udløser funktionen "sortering"
+            kønKnap.forEach(knap => {
+                knap.addEventListener("click", kønFiltrering);
+            });
         }
 
         //Der laves en async funktion til at skaffe dataen fra JSON-filen
@@ -101,6 +120,23 @@
             console.log(sneakers);
             visSneakers(); //funktionen "visSneakers" kaldes
         }
+
+
+
+        //Når man klikker på et køn sendes man til denne funktion
+        function kønFiltrering() {
+            //For hver knap til filtrering fjernes classen "valgt"
+            kønKnap.forEach(knap => {
+                knap.classList.remove("valgt");
+            });
+
+            this.classList.add("valgt"); //Den trykkede knap får tildelt klassen "valgt"
+            køn = this.dataset.køn; //Variablen køn sættes = dataen fra den trykkede knap
+            console.log(brand);
+            visSneakers(); //funktionen "visSneakers" kaldes
+        }
+
+
 
         //Når man klikker på en filtreringsmulighed sendes man til denne funktion
         function filtrering() {
@@ -161,26 +197,39 @@
 
             //hvert objekt i array'et "sneakers" kaldes sko & viser forskellige sko-properties i en article
             sneakers.feed.entry.forEach(sko => {
-                //Som udgangspunkt viser vi alle brands sko - inden en filtrering er sket
-                //Hvis en filtrering er sket, så spørger vi om sko-objektets "brand"-property er det samme som den valgte filteringsmulighed
-                //Er en filtering sket, så klones der kun antallet af sko i det valgte brand
-                if (brand == "alle" || sko.gsx$brand.$t == brand) {
-                    //Variablen "klon" defineres til at lave article-kloner baseret på antallet af objekter
-                    let klon = sneakerTemplate.cloneNode(true).content;
-                    klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand og navn vises i h2-tag
-                    klon.querySelector("img").src = `imgs/small/${sko.gsx$billede.$t}-sm.jpg`; //skoens billede angives som source til img-tag
-                    klon.querySelector("p").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
-                    klon.querySelector("p:last-child").textContent += sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
 
-                    //for hver klon skal der laves en eventlistener der udløser en anonym-funktion
-                    klon.querySelector(".sneaker").addEventListener("click", () => {
-                        //URL'en erstattes med "detalje.html?id=" OG sko-ID, da dette er unikt
-                        location.href = `detalje.html?id=${sko.gsx$id.$t}`;
-                    });
+                //Vi sorterer efter køn og viser som default alle
+                if (køn == "alle" || køn == sko.gsx$køn.$t) {
+                    //Som udgangspunkt viser vi alle brands sko - inden en filtrering er sket
+                    //Hvis en filtrering er sket, så spørger vi om sko-objektets "brand"-property er det samme som den valgte filteringsmulighed
+                    //Er en filtering sket, så klones der kun antallet af sko i det valgte brand
+                    if (brand == "alle" || sko.gsx$brand.$t == brand) {
+                        //Variablen "klon" defineres til at lave article-kloner baseret på antallet af objekter
+                        let klon = sneakerTemplate.cloneNode(true).content;
+                        klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand og navn vises i h2-tag
+                        klon.querySelector("img").src = `imgs/small/${sko.gsx$billede.$t}-sm.jpg`; //skoens billede angives som source til img-tag
+                        klon.querySelector("p").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
+                        klon.querySelector("p:last-child").textContent += sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
 
-                    //Alle de klonede elementer vises i container / produkt-grid
-                    container.appendChild(klon);
+                        //for hver klon skal der laves en eventlistener der udløser en anonym-funktion
+                        klon.querySelector(".sneaker").addEventListener("click", () => {
+                            //URL'en erstattes med "detalje.html?id=" OG sko-ID, da dette er unikt
+                            location.href = `detalje.html?id=${sko.gsx$id.$t}`;
+                        });
+
+                        //Alle de klonede elementer vises i container / produkt-grid
+                        container.appendChild(klon);
+                    }
                 }
+
+
+
+
+
+
+
+
+
             });
 
         }

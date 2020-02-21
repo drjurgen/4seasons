@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 img {
@@ -71,7 +71,7 @@ button:focus {
 #detalje .detalje-sko .sko-navn h1 {
     text-align: center;
     position: relative;
-    top: 31%;
+    top: 28%;
     text-transform: uppercase;
 }
 
@@ -95,9 +95,9 @@ button:focus {
     margin-bottom: 10px;
 }
 
-#detalje .beskrivelse .txt p:nth-child(3) {
+#detalje .beskrivelse .txt p:nth-child(1) {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     margin: 0 0 14px 0;
 }
 
@@ -150,8 +150,7 @@ button:focus {
     transition: .3s;
 }
 
-.size:hover,
-.buy:hover {
+.size:hover {
     background-color: #fff;
     color: #333;
 }
@@ -169,6 +168,11 @@ button:focus {
     transition: .3s;
     width: 100%;
     font-size: 12px;
+    font-weight: 700;
+}
+
+.buy:hover {
+    background-color: #64d37c;
 }
 
 
