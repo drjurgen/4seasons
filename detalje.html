@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="detalje.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -34,10 +35,19 @@
         </div>
 
         <div class="beskrivelse">
+
+            <div class="breadcrumb">
+                <a href="index.html">HJEM</a>
+                <p> / </p>
+                <a href="produkter.html">PRODUKTER</a>
+                <p> / </p>
+                <p class="sko-breadcrumb">???</p>
+            </div>
+
             <div class="txt">
-                <p>Farver: </p>
                 <p></p>
-                <p></p><br>
+                <p></p>
+                <p>Farver: </p><br>
                 <p></p>
             </div>
 
@@ -89,7 +99,9 @@
                     detalje.querySelector(".txt p").textContent = sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
                     detalje.querySelector(".txt p:nth-child(2)").textContent = sko.gsx$lang.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
                     detalje.querySelector(".txt p:nth-child(3)").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende
-                    detalje.querySelector(".txt p:last-child").textContent = "Tilgængelige størrelser:"; //
+                    detalje.querySelector(".txt p:last-child").textContent = "Tilgængelige størrelser:";
+
+                    detalje.querySelector(".sko-breadcrumb").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t;
 
                     detalje.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand/navn vises i h2-tag
                     detalje.querySelector("h1").textContent = sko.gsx$h1.$t; //skoens model vises i h1-tag
