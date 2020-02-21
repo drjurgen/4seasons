@@ -7,6 +7,7 @@
     <title>Produkter</title>
     <link rel="stylesheet" href="produkter.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 
 </head>
 
@@ -30,6 +31,11 @@
         </nav>
     </header>
 
+    <section class="breadcrumb">
+        <a href="index.html">HJEM</a>
+        <p> / </p>
+        <a href="produkter.html">PRODUKTER</a>
+    </section>
 
     <section id="oversigt">
         <div class="dropdown">
@@ -202,7 +208,7 @@
                     if (brand == "alle" || sko.gsx$brand.$t == brand) {
                         //Variablen "klon" defineres til at lave article-kloner baseret på antallet af objekter
                         let klon = sneakerTemplate.cloneNode(true).content;
-                        klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand og navn vises i h2-tag
+                        klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$model.$t; //skoens brand og navn vises i h2-tag
                         klon.querySelector("img").src = `imgs/small/${sko.gsx$billede.$t}-sm.jpg`; //skoens billede angives som source til img-tag
                         klon.querySelector("p").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
                         klon.querySelector("p:last-child").textContent += sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag

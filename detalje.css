@@ -66,6 +66,7 @@ button:focus {
 #detalje .detalje-sko .sko-navn h1,
 #detalje .detalje-sko .sko-navn h2 {
     margin: 0;
+    font-family: 'Permanent Marker', sans-serif;
 }
 
 #detalje .detalje-sko .sko-navn h1 {
@@ -180,8 +181,7 @@ button:focus {
 }
 
 .size:hover {
-    background-color: #fff;
-    color: #333;
+    transform: scale(1.06);
 }
 
 .buy {

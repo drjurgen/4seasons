@@ -5,7 +5,7 @@ h2 {
 body {
     margin: 0;
     font-family: 'Open Sans',
-    sans-serif;
+        sans-serif;
 }
 
 img {
@@ -34,6 +34,8 @@ img {
     margin: 0 15px;
 }
 
+
+
 .sneaker img {
     object-fit: cover;
 }
@@ -41,11 +43,14 @@ img {
 .sneaker p,
 .sneaker h2,
 .sneaker img {
-    margin: 5px 0;
+    margin: 2px 0;
+}
+
+.sneaker p:last-child {
+    margin-bottom: 10px;
 }
 
 #oversigt {
-    padding-top: 25px;
     padding-bottom: 5px;
     display: flex;
     align-items: center;
@@ -59,6 +64,31 @@ button:focus {
     outline: 0;
 }
 
+.breadcrumb {
+    padding-left: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb a,
+.breadcrumb p {
+    margin-right: 5px;
+    text-decoration: none;
+    color: #6d6d6d;
+    transition: .3s;
+    text-transform: uppercase;
+}
+
+.breadcrumb a:hover {
+    margin-right: 5px;
+    text-decoration: none;
+    color: #000;
+}
+
+
+
 /***************** DROP DOWN MENU **************/
 /* Dropdown Button */
 .dropbtn {
@@ -67,6 +97,7 @@ button:focus {
     padding: 16px;
     font-size: 16px;
     border: none;
+    font-family: 'Permanent Marker', sans-serif;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -136,6 +167,7 @@ header {
     width: 100%;
     height: 100px;
     background-color: #fff;
+    font-family: 'Permanent Marker', sans-serif;
 }
 
 nav {
@@ -188,7 +220,6 @@ nav a:first-child:hover {
 
 
     #oversigt {
-        padding-top: 50px;
         max-width: 1000px;
         margin: 0 auto;
     }
