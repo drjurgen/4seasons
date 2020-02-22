@@ -13,8 +13,16 @@
 <body>
     <header>
         <nav>
+            <div class="dropdown">
+                <button class="dropbtn">Produkter &#9662;</button>
+                <div class="dropdown-content">
+                    <button class="gender" data-køn="alle">Alle</button>
+                    <button class="gender" data-køn="m">Mænd</button>
+                    <button class="gender" data-køn="k">Kvinder</button>
+                </div>
+            </div>
 
-            <a href="produkter.html">Produkter</a>
+            <!--            <a href="produkter.html">Produkter</a>-->
             <a href="index.html">
                 <img src="logo.svg" alt="">
             </a>
@@ -75,7 +83,10 @@
         const urlParams = new URLSearchParams(window.location.search); //urlParams defineres som alt efter spørgsmålstegnet
         const id = urlParams.get("id"); //Vi gemmer det medbragte ID fra URL'en, så vi kan henvise til det senere
 
+        const kønKnap = document.querySelectorAll(".gender"); //Der defineres variabel til vores filtrering af køn
+
         let sneakers = []; //sneakers defineres som et tomt array den skal indeholde alle objekterne fra JSON-filen
+        let køn = "alle";
 
         //Når alle elementer i DOM'en er loadet, så skal funktionen "start" igangsættes
         document.addEventListener("DOMContentLoaded", start);
@@ -83,6 +94,10 @@
 
         function start() {
             hentData(); //Vi kalder funktionen hentData, så vi kan skaffe objekterne fra JSON-filen
+
+            kønKnap.forEach(knap => {
+                knap.addEventListener("click", kønFiltrering);
+            });
         }
 
         //Der laves en async funktion til at skaffe dataen fra JSON-filen
@@ -91,6 +106,13 @@
             sneakers = await response.json(); //sneakers-array får dataen i response fra JSON-filen
             console.log(sneakers);
             visSneakers(); //funktionen "visSneakers" kaldes
+        }
+
+        function kønFiltrering() {
+            køn = this.dataset.køn; //Variablen køn sættes = dataen fra den trykkede knap
+            console.log(køn);
+            //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden
+            location.href = `produkter.html?gender=${køn}`;
         }
 
 

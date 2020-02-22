@@ -33,7 +33,7 @@
     <section class="breadcrumb">
         <a href="index.html">HJEM</a>
         <p> / </p>
-        <a href="produkter.html" class="breadcrumb-produkter">PRODUKTER - </a>
+        <a href="produkter.html" class="breadcrumb-produkter">PRODUKTER</a>
         <p> / </p>
         <p class="breadcrumb-filter"></p>
         <p></p>
@@ -90,6 +90,11 @@
         //Vi definerer et endpoint som er vores Google Sheet aka JSON-fil
         const endpoint = "https://spreadsheets.google.com/feeds/list/1ZPVcO_A1ALH2vKozmQvf5pL-lqHAhTAFL8d3Hz9ifec/od6/public/values?alt=json";
 
+        //Vi definerer variabler der skal bruges til at filtrere køn
+        const urlParams = new URLSearchParams(window.location.search); //urlParams defineres som alt efter spørgsmålstegnet
+        const kønURL = urlParams.get("gender"); //Vi gemmer det medbragte ID fra URL'en, så vi kan henvise til det senere
+        window.history.replaceState({}, document.title, "/" + "produkter.html");
+
         //Der defineres variabler til vores filtrerings & sorteringsmuligheder
         const filterKnap = document.querySelectorAll(".filter");
         const sorterKnap = document.querySelectorAll(".sorter");
@@ -124,7 +129,14 @@
                 knap.addEventListener("click", kønFiltrering);
             });
 
-            document.querySelector(".breadcrumb").classList = "breadcrumb show";
+            document.querySelector(".breadcrumb").classList = "breadcrumb show"; //Der afspilles en fade-animation på breadcrumb
+
+            //Vi tester om URL'en indeholder "alle", "m" eller "k" som gender
+            //Hvis dette er sandt, så sætter vi køn = dataen fra URL'en
+            //Dermed vises kun det køn fra kønURL-variablen
+            if (kønURL == "alle" || kønURL == "m" || kønURL == "k") {
+                køn = kønURL;
+            }
         }
 
         //Der laves en async funktion til at skaffe dataen fra JSON-filen
@@ -146,7 +158,7 @@
 
             this.classList.add("valgt"); //Den trykkede knap får tildelt klassen "valgt"
             køn = this.dataset.køn; //Variablen køn sættes = dataen fra den trykkede knap
-            console.log(brand);
+            console.log(køn);
             visSneakers(); //funktionen "visSneakers" kaldes
         }
 

@@ -261,3 +261,97 @@ footer {
 }
 
 /***************** HEADER & FOOTER SLUT *****************/
+
+
+
+/***************** DROP DOWN MENU **************/
+/* Dropdown Button */
+.dropbtn {
+    background-color: #fff;
+    color: #000;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    font-family: 'Permanent Marker', sans-serif;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 110px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin: 0 15px;
+
+}
+
+/* Links inside the dropdown */
+.dropdown-content .filter,
+.dropdown-content .sorter,
+.dropdown-content .gender {
+    color: black;
+    width: 100%;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px inset #333;
+    cursor: pointer;
+
+}
+
+.dropdown-content button:hover {
+    /* Change color of dropdown links on hover */
+    background-color: #ddd;
+}
+
+
+.dropdown:hover .dropdown-content {
+    /* Show the dropdown menu on hover */
+    display: block;
+}
+
+
+.dropdown:hover .dropbtn {
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    color: #414141;
+}
+
+/***************** DROP DOWN MENU SLUT **************/
+
+
+/********************* MEDIA QUERIES *********************/
+@media screen and (min-width:768px) {
+
+
+    #oversigt {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+
+
+}
+
+@media screen and (min-width:1200px) {
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        z-index: 1;
+        float: right;
+    }
+}
+
+/********************* MEDIA QUERIES SLUT *********************/

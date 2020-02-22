@@ -14,8 +14,14 @@
     <section id="landingpage">
         <header>
             <nav>
-                <a href="produkter.html">Produkter</a>
-                <!--                <a href="#">Om</a>-->
+                <div class="dropdown">
+                    <button class="dropbtn">Produkter &#9662;</button>
+                    <div class="dropdown-content">
+                        <button class="gender" data-køn="alle">Alle</button>
+                        <button class="gender" data-køn="m">Mænd</button>
+                        <button class="gender" data-køn="k">Kvinder</button>
+                    </div>
+                </div>
                 <a href="index.html" class="logo">
                     <img src="logo.svg" alt="">
                 </a>
@@ -34,6 +40,8 @@
 
     <script>
         const picture = document.querySelector(".sectionwrapper");
+        const kønKnap = document.querySelectorAll(".gender"); //Der defineres variabel til vores filtrering af køn
+
         let slideCounter = 0;
 
         document.addEventListener("DOMContentLoaded", start);
@@ -41,6 +49,17 @@
         function start() {
             console.log("start");
             slideChange();
+
+            kønKnap.forEach(knap => {
+                knap.addEventListener("click", kønFiltrering);
+            });
+        }
+
+        function kønFiltrering() {
+            køn = this.dataset.køn; //Variablen køn sættes = dataen fra den trykkede knap
+            console.log(køn);
+            //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden
+            location.href = `produkter.html?gender=${køn}`;
         }
 
         function slideChange() {
