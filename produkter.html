@@ -12,12 +12,8 @@
 </head>
 
 <body>
-
     <header>
         <nav>
-            <a href="index.html">
-                <img src="logo.svg" alt="">
-            </a>
             <div class="dropdown">
                 <button class="dropbtn">Produkter &#9662;</button>
                 <div class="dropdown-content">
@@ -26,7 +22,10 @@
                     <button class="gender" data-køn="k">Kvinder</button>
                 </div>
             </div>
-            <a href="#">Om</a>
+            <!--                <a href="#">Om</a>-->
+            <a href="index.html" class="logo">
+                <img src="logo.svg" alt="">
+            </a>
             <a href="#">Kontakt</a>
         </nav>
     </header>
@@ -34,7 +33,11 @@
     <section class="breadcrumb">
         <a href="index.html">HJEM</a>
         <p> / </p>
-        <a href="produkter.html">PRODUKTER</a>
+        <a href="produkter.html" class="breadcrumb-produkter">PRODUKTER - </a>
+        <p> / </p>
+        <p class="breadcrumb-filter"></p>
+        <p></p>
+        <p class="breadcrumb-sortering"></p>
     </section>
 
     <section id="oversigt">
@@ -76,6 +79,13 @@
         </article>
     </template>
 
+    <!--
+    <footer>
+        <p>some footer here</p>
+    </footer>
+-->
+
+
     <script>
         //Vi definerer et endpoint som er vores Google Sheet aka JSON-fil
         const endpoint = "https://spreadsheets.google.com/feeds/list/1ZPVcO_A1ALH2vKozmQvf5pL-lqHAhTAFL8d3Hz9ifec/od6/public/values?alt=json";
@@ -113,6 +123,8 @@
             kønKnap.forEach(knap => {
                 knap.addEventListener("click", kønFiltrering);
             });
+
+            document.querySelector(".breadcrumb").classList = "breadcrumb show";
         }
 
         //Der laves en async funktion til at skaffe dataen fra JSON-filen
@@ -208,11 +220,29 @@
                     if (brand == "alle" || sko.gsx$brand.$t == brand) {
                         //Variablen "klon" defineres til at lave article-kloner baseret på antallet af objekter
                         let klon = sneakerTemplate.cloneNode(true).content;
+
+                        //Vi sætter brødkrummestien til at indeholde brandfiltrering
+                        document.querySelector(".breadcrumb-filter").textContent = brand;
+                        document.querySelector(".breadcrumb p + p + p").textContent = "";
+                        //Hvis sorteringsværdien er høj eller lav, så viser vi også dette i brødkrummestien
+                        if (sorterPris == "lav" || sorterPris == "høj") {
+                            document.querySelector(".breadcrumb p + p + p").textContent = "/";
+                            document.querySelector(".breadcrumb-sortering").textContent = sorterPris + "este først";
+                        }
+
+                        if (køn == "alle") {
+                            document.querySelector(".breadcrumb-produkter").textContent = "produkter";
+                        } else if (køn == "m") {
+                            document.querySelector(".breadcrumb-produkter").textContent = "produkter - mænd";
+                        } else if (køn == "k") {
+                            document.querySelector(".breadcrumb-produkter").textContent = "produkter - kvinder";
+                        }
+
                         klon.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$model.$t; //skoens brand og navn vises i h2-tag
                         klon.querySelector("img").src = `imgs/small/${sko.gsx$billede.$t}-sm.jpg`; //skoens billede angives som source til img-tag
                         klon.querySelector("p").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende indhold
                         klon.querySelector("p:last-child").textContent += sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
-
+                        klon.querySelector("article").classList.add("show"); //Der tilføjes en animation-klasse når skoene vises
                         //for hver klon skal der laves en eventlistener der udløser en anonym-funktion
                         klon.querySelector(".sneaker").addEventListener("click", () => {
                             //URL'en erstattes med "detalje.html?id=" OG sko-ID, da dette er unikt
@@ -223,17 +253,7 @@
                         container.appendChild(klon);
                     }
                 }
-
-
-
-
-
-
-
-
-
             });
-
         }
 
     </script>

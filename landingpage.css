@@ -39,41 +39,29 @@ nav {
     height: 100%;
 
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     align-content: center;
 }
 
 nav a {
-    padding-right: 20px;
+    margin: 0 20px;
     text-decoration: none;
     color: black;
-    padding: 40px;
-}
-
-nav a:first-child {
-    align-self: center;
-    position: absolute;
-    left: 0;
-    top: 0;
-
     transition: .3s;
+    font-size: 20px;
 }
 
-nav a:first-child img {
-    height: 50px;
-    width: 130px;
-    position: absolute;
-    left: 10px;
-    top: 22px;
-    z-index: 10;
-    background-color: #fff;
-}
-
-nav a:first-child:hover {
+nav a:hover {
     transform: scale(1.04);
 }
 
+.logo img {
+    height: 50px;
+    width: 130px;
+    z-index: 10;
+    background-color: #fff;
+}
 
 /********************* Header slut *********************/
 
@@ -100,8 +88,8 @@ nav a:first-child:hover {
 }
 
 
-.container h1 {
-    margin-top: 200px;
+.container a {
+    margin-top: 25vh;
 }
 
 .container a {

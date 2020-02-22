@@ -13,12 +13,12 @@
 <body>
     <header>
         <nav>
+
+            <a href="produkter.html">Produkter</a>
             <a href="index.html">
                 <img src="logo.svg" alt="">
             </a>
 
-            <a href="produkter.html">Produkter</a>
-            <a href="#">Om</a>
             <a href="#">Kontakt</a>
         </nav>
     </header>
@@ -62,6 +62,12 @@
         </div>
     </section>
 
+    <!--
+    <footer>
+        <p>some footer here</p>
+    </footer>
+    -->
+
     <script>
         //Vi definerer et endpoint som er vores Google Sheet aka JSON-fil
         const endpoint = "https://spreadsheets.google.com/feeds/list/1ZPVcO_A1ALH2vKozmQvf5pL-lqHAhTAFL8d3Hz9ifec/od6/public/values?alt=json";
@@ -101,7 +107,7 @@
                     detalje.querySelector(".txt p:nth-child(3)").textContent += sko.gsx$farve.$t; //skoens farver tilføjes til p-taggets eksisterende
                     detalje.querySelector(".txt p:last-child").textContent = "Tilgængelige størrelser:";
 
-                    detalje.querySelector(".sko-breadcrumb").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t;
+                    detalje.querySelector(".sko-breadcrumb").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t + " " + sko.gsx$h1.$t;
 
                     detalje.querySelector("h2").textContent = sko.gsx$brand.$t + " " + sko.gsx$navn.$t; //skoens brand/navn vises i h2-tag
                     detalje.querySelector("h1").textContent = sko.gsx$h1.$t; //skoens model vises i h1-tag
@@ -121,13 +127,6 @@
                         klon.querySelector("p").textContent = størrelse; //p-taggets indhold sættes lig den enkelte størrelse
                         container.appendChild(klon); //Alle de klonede elementer vises i container
                     });
-
-                    //klikker man på tilbage-knappen, så sendes man tilbage i ens browser-historik
-                    /*
-                    detalje.querySelector("#fjern-detalje").addEventListener("click", () => {
-                        history.back();
-                    });
-                    */
                 }
             });
 
