@@ -93,7 +93,7 @@
         //Vi definerer variabler der skal bruges til at filtrere køn
         const urlParams = new URLSearchParams(window.location.search); //urlParams defineres som alt efter spørgsmålstegnet
         const kønURL = urlParams.get("gender"); //Vi gemmer det medbragte ID fra URL'en, så vi kan henvise til det senere
-        window.history.replaceState({}, document.title, "/" + "produkter.html");
+        //window.history.replaceState({}, document.title, "/" + "produkter.html");
 
         //Der defineres variabler til vores filtrerings & sorteringsmuligheder
         const filterKnap = document.querySelectorAll(".filter");
