@@ -136,6 +136,13 @@
             //Dermed vises kun det køn fra kønURL-variablen
             if (kønURL == "alle" || kønURL == "m" || kønURL == "k") {
                 køn = kønURL;
+
+                kønKnap.forEach(knap => {
+                    knap.classList.remove("valgt");
+                    if (knap.dataset.køn == køn) {
+                        knap.classList.add("valgt");
+                    }
+                });
             }
         }
 
