@@ -63,18 +63,37 @@
         }
 
         function slideChange() {
-            slideCounter = slideCounter + 1;
+            slideCounter++;
             picture.style.backgroundImage = "url(imgs/imageslide/slide" + slideCounter + ".jpg)";
             picture.classList.add("show");
             console.log(slideCounter);
 
-            if (slideCounter == 8) {
+
+            if (slideCounter == 1) {
+                picture.style.backgroundPosition = "0% 90%";
+                console.log("first slide");
+            } else if (slideCounter == 2) {
+                picture.style.backgroundPosition = "70% 0%";
+
+            } else if (slideCounter == 3) {
+                picture.style.backgroundPosition = "50% 0%";
+
+            } else if (slideCounter == 4) {
+                picture.style.backgroundPosition = "40% 0%";
+            } else if (slideCounter == 5) {
+                picture.style.backgroundPosition = "40% 0%";
+            } else if (slideCounter == 6) {
+                picture.style.backgroundPosition = "50% 100%";
+            } else if (slideCounter == 7) {
+                picture.style.backgroundPosition = "45% 0%";
+            } else if (slideCounter == 8) {
+                picture.style.backgroundPosition = "25% 0%";
                 slideCounter = 0;
             }
 
             setTimeout(function() {
                 picture.classList.remove("show");
-            }, 2000);
+            }, 1000);
 
             setTimeout(function() {
                 slideChange();
