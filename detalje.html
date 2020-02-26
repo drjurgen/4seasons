@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="da">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>DETALJE</title>
     <link rel="stylesheet" href="detalje.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
 
 <body>
     <header>
+        <!--Navigationen indeholder en dropdownmenu med specificeret produkter-->
         <nav>
             <div class="dropdown">
                 <button class="dropbtn">Produkter &#9662;</button>
@@ -22,7 +23,6 @@
                 </div>
             </div>
 
-            <!--            <a href="produkter.html">Produkter</a>-->
             <a href="index.html">
                 <img src="logo.svg" alt="">
             </a>
@@ -31,10 +31,9 @@
         </nav>
     </header>
 
+    <!--Denne sektion indeholder alt information om skoen, herunder billede, model, pris og beskrivelse-->
     <section id="detalje" class="">
-        <!--
-        <button id="fjern-detalje">TILBAGE</button>
-        !-->
+        <!--Siden inddeles i 2, hvor venstredel indeholder skoens navn og billede-->
         <div class="detalje-sko">
             <div class="sko-navn">
                 <h2></h2>
@@ -42,8 +41,8 @@
             </div>
         </div>
 
+        <!--Højre del indeholder breadcrumb, beskrivelse, pris og køb-knap-->
         <div class="beskrivelse">
-
             <div class="breadcrumb">
                 <a href="index.html">HJEM</a>
                 <p> / </p>
@@ -91,10 +90,11 @@
         //Når alle elementer i DOM'en er loadet, så skal funktionen "start" igangsættes
         document.addEventListener("DOMContentLoaded", start);
 
-
+        //Denne funktion igangsættes, når al indhold i DOM'en er loadet
         function start() {
             hentData(); //Vi kalder funktionen hentData, så vi kan skaffe objekterne fra JSON-filen
 
+            //for hver filtreringssmulighed skal der laves en eventlistener der udløser funktionen "kønFiltrering"
             kønKnap.forEach(knap => {
                 knap.addEventListener("click", kønFiltrering);
             });
@@ -108,6 +108,7 @@
             visSneakers(); //funktionen "visSneakers" kaldes
         }
 
+        //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden + det klikket køn
         function kønFiltrering() {
             køn = this.dataset.køn; //Variablen køn sættes = dataen fra den trykkede knap
             console.log(køn);
@@ -115,7 +116,7 @@
             location.href = `produkter.html?gender=${køn}`;
         }
 
-
+        //visSneakers bruges til at vise den enkelte sko
         function visSneakers() {
             //hvert objekt i array'et "sneakers" kaldes sko & viser forskellige sko-properties i en article
             sneakers.feed.entry.forEach(sko => {

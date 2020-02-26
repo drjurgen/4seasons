@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="da">
 
 <head>
     <meta charset="utf-8">
@@ -13,6 +13,8 @@
 <body>
     <section id="landingpage">
         <header>
+
+            <!--Navigationen indeholder en dropdownmenu med specificeret produkter-->
             <nav>
                 <div class="dropdown">
                     <button class="dropbtn">Produkter &#9662;</button>
@@ -29,6 +31,8 @@
             </nav>
         </header>
 
+        <!--Sectionwrapper indeholder alt pånær navigation der vises på siden-->
+        <!--Dette inkluderer slideshow + CTA knap-->
         <div class="sectionwrapper">
             <div class="container">
                 <h1></h1>
@@ -39,66 +43,72 @@
 
 
     <script>
-        const picture = document.querySelector(".sectionwrapper");
+        const picture = document.querySelector(".sectionwrapper"); //Picture har browserens fulde bredde & højde og defineres derfor til senere brug
         const kønKnap = document.querySelectorAll(".gender"); //Der defineres variabel til vores filtrering af køn
 
-        let slideCounter = 0;
+        let slideCounter = 0; //Vi definerer variablen "slideCounter" til at vise de forskellige billeder
+        let køn; //Når der skal filtreres efter køn, så vælger vi at definere "køn" som start til at være lig "alle"
 
+        //Når alle elementer i DOM'en er loadet, så skal funktionen "start" igangsættes
         document.addEventListener("DOMContentLoaded", start);
 
+        //Denne funktion igangsættes, når al indhold i DOM'en er loadet
         function start() {
             console.log("start");
-            slideChange();
+            slideChange(); //Vi starter slideChange funktionen
 
+            //for hver filtreringssmulighed skal der laves en eventlistener der udløser funktionen "kønFiltrering"
             kønKnap.forEach(knap => {
                 knap.addEventListener("click", kønFiltrering);
             });
         }
 
+        //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden + det klikket køn
         function kønFiltrering() {
             køn = this.dataset.køn; //Variablen køn sættes = dataen fra den trykkede knap
             console.log(køn);
-            //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden
+            //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden + det klikket køn
             location.href = `produkter.html?gender=${køn}`;
         }
 
+        //slideChange skifter det billede der vises på landingpage-slideshowet
         function slideChange() {
-            slideCounter++;
+            slideCounter++; //SlideCounter forøges med 1 og fortæller hvad
+
+            //picture's baggrundsbillede defineres som "slide" + slideCounter's nuværende værdi
             picture.style.backgroundImage = "url(imgs/imageslide/slide" + slideCounter + ".jpg)";
-            picture.classList.add("show");
+            picture.classList.add("show"); //Der tilføjes en animationsklasse, så billedet fader ind
             console.log(slideCounter);
 
-
+            //Denne if-sætning kontrollerer positionen af baggrundsbilledet alt efter slideCounters nuværende værdi
             if (slideCounter == 1) {
                 picture.style.backgroundPosition = "0% 90%";
-                console.log("first slide");
             } else if (slideCounter == 2) {
-                picture.style.backgroundPosition = "70% 0%";
-
+                picture.style.backgroundPosition = "70% 60%";
             } else if (slideCounter == 3) {
-                picture.style.backgroundPosition = "50% 0%";
-
+                picture.style.backgroundPosition = "50% 80%";
             } else if (slideCounter == 4) {
-                picture.style.backgroundPosition = "40% 0%";
+                picture.style.backgroundPosition = "40% 100%";
             } else if (slideCounter == 5) {
-                picture.style.backgroundPosition = "40% 0%";
+                picture.style.backgroundPosition = "40% 60%";
             } else if (slideCounter == 6) {
                 picture.style.backgroundPosition = "50% 100%";
             } else if (slideCounter == 7) {
-                picture.style.backgroundPosition = "45% 0%";
+                picture.style.backgroundPosition = "45% 95%";
             } else if (slideCounter == 8) {
-                picture.style.backgroundPosition = "25% 0%";
-                slideCounter = 0;
+                picture.style.backgroundPosition = "25% 90%";
+                slideCounter = 0; //Når slideCounter har nået max værdi af slides, så nulstilles den
             }
 
+            //Når animationsklassen er færdig fjernes den
             setTimeout(function() {
                 picture.classList.remove("show");
             }, 1000);
 
+            //Når et billede har været fremme i 4 sekunder, så genkaldes funktionen
             setTimeout(function() {
                 slideChange();
             }, 4000);
-
         }
 
     </script>

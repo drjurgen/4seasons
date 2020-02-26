@@ -216,20 +216,11 @@ nav img {
     }
 
     100% {
-        background-color: none;
         opacity: 1;
     }
 }
 
 /********************* Animationer Slut *********************/
-
-
-
-
-
-
-
-
 
 
 /********************* Media queries *********************/
@@ -251,6 +242,11 @@ nav img {
     }
 }
 
-
+@media screen and (min-width:1200px) {
+    .dropdown-content {
+        min-width: 160px;
+        margin: 0;
+    }
+}
 
 /********************* Media queries slut *********************/

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="da">
 
 <head>
     <meta charset="utf-8">
@@ -13,6 +13,7 @@
 
 <body>
     <header>
+        <!--Navigationen indeholder en dropdownmenu med specificeret produkter-->
         <nav>
             <div class="dropdown">
                 <button class="dropbtn">Produkter &#9662;</button>
@@ -22,7 +23,6 @@
                     <button class="gender" data-køn="k">Kvinder</button>
                 </div>
             </div>
-            <!--                <a href="#">Om</a>-->
             <a href="index.html" class="logo">
                 <img src="logo.svg" alt="">
             </a>
@@ -30,6 +30,7 @@
         </nav>
     </header>
 
+    <!--Denne sektion viser en brødkrummesti og kan også vise hvilke filtreringer og sorteringer der er foretaget-->
     <section class="breadcrumb">
         <a href="index.html">HJEM</a>
         <p> / </p>
@@ -40,6 +41,7 @@
         <p class="breadcrumb-sortering"></p>
     </section>
 
+    <!--Oversigt sektionen indeholder filtrering efter mærke og sortering efter pris // Dette sker via dropdown-menu-->
     <section id="oversigt">
         <div class="dropdown">
             <button class="dropbtn">Filtrer efter &#9662;</button>
@@ -67,7 +69,7 @@
     </section>
 
 
-
+    <!--Nedenfor er skelettet til hver sko, der vises på siden //Der vises et billede, model, farver og pris-->
     <section id="container"></section>
 
     <template>
@@ -93,7 +95,29 @@
         //Vi definerer variabler der skal bruges til at filtrere køn
         const urlParams = new URLSearchParams(window.location.search); //urlParams defineres som alt efter spørgsmålstegnet
         const kønURL = urlParams.get("gender"); //Vi gemmer det medbragte ID fra URL'en, så vi kan henvise til det senere
-        //window.history.replaceState({}, document.title, "/" + "produkter.html");
+
+        //konstanten dropDownMenu + variablen dropDownClick bruges til at dropdown-menuen på mobilen
+        const dropDownMenu = document.querySelectorAll(".dropdown");
+        let dropDownClick = 0;
+        //for hver dropdownmenu skal der laves en eventlistener der udløser funktionen "showDropDown"
+        dropDownMenu.forEach(knap => {
+            knap.addEventListener("click", showDropDown);
+        });
+
+        //showDropDown bruges til at omkoble hover-effekter til klikbare elementer
+        function showDropDown() {
+            dropDownClick++; //dropDownClick forøges med 1
+            //Hvis den brugte enhed til visning af sitet er en af nedenstående, så gå videre
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                if (dropDownClick == 1) { //Første gang der klikkes på dropdown-menuen vises dens indhold
+                    this.querySelector(".dropdown-content").style.display = "block";
+
+                } else if (dropDownClick == 2) { //Næste gang der klikkes på dropdown-menuen skjules dens indhold
+                    this.querySelector(".dropdown-content").style.display = "none";
+                    dropDownClick = 0; //Variablen nulstilles
+                }
+            }
+        }
 
         //Der defineres variabler til vores filtrerings & sorteringsmuligheder
         const filterKnap = document.querySelectorAll(".filter");
@@ -104,7 +128,7 @@
         let brand = "alle"; //Brand defineres som variabel og sættes som udgangspunkt = "alle"
         let sorterPris; //sorterPris defineres uden værdi, da den får det senere
         let sorterTekst = document.querySelector(".sortering"); //sorterTekst bruges til at fortælle brugeren hvad de lige nu sorterer efter
-        let køn = "alle";
+        let køn = "alle"; //Når der skal filtreres efter køn, så vælger vi at definere "køn" som start til at være lig "alle"
 
         let sneakers = []; //sneakers defineres som et tomt array den skal indeholde alle objekterne fra JSON-filen
 
@@ -124,7 +148,7 @@
                 knap.addEventListener("click", sortering);
             });
 
-            //for hver sorteringsmulighed skal der laves en eventlistener der udløser funktionen "sortering"
+            //for hver filtreringssmulighed skal der laves en eventlistener der udløser funktionen "kønFiltrering"
             kønKnap.forEach(knap => {
                 knap.addEventListener("click", kønFiltrering);
             });
@@ -249,6 +273,7 @@
                             document.querySelector(".breadcrumb-sortering").textContent = sorterPris + "este først";
                         }
 
+                        //Hvis kønFiltreringsværdien er alle, m eller k, så viser vi også dette i brødkrummestien
                         if (køn == "alle") {
                             document.querySelector(".breadcrumb-produkter").textContent = "produkter";
                         } else if (køn == "m") {
