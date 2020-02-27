@@ -274,6 +274,7 @@ footer {
 
 
 /***************** DROP DOWN MENU **************/
+/* Dropdown Button */
 .dropbtn {
     background-color: #fff;
     color: #000;
@@ -311,17 +312,20 @@ footer {
     text-align: left;
     background-color: #fff;
     border: none;
-    border-bottom: 1px inset #333;
     cursor: pointer;
+    transition: .2s;
 
 }
 
 .dropdown-content button:hover {
     /* Change color of dropdown links on hover */
-    background-color: #ddd;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
 }
 
 
+.dropdown:active .dropdown-content,
 .dropdown:hover .dropdown-content {
     /* Show the dropdown menu on hover */
     display: block;
@@ -331,6 +335,13 @@ footer {
 .dropdown:hover .dropbtn {
     /* Change the background color of the dropdown button when the dropdown content is shown */
     color: #414141;
+}
+
+.valgt {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff !important;
+    background-color: #333 !important;
 }
 
 /***************** DROP DOWN MENU SLUT **************/
