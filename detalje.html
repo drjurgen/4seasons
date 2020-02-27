@@ -140,7 +140,7 @@
             sneakers.feed.entry.forEach(sko => {
                 //Vi spørger om sko-objekternes id-property har samme værdi som variablen id // se linje 128
                 if (sko.gsx$id.$t == id) {
-                    document.title = sko.gsx$brand.$t + " " + sko.gsx$navn.$t + " | Say Sneaks"; //Fanens titel sættes = navnet på skoen
+                    document.title = sko.gsx$brand.$t + " " + sko.gsx$navn.$t + " " + sko.gsx$h1.$t + " | Say Sneaks"; //Fanens titel sættes = navnet på skoen
 
                     console.log(sko.gsx$navn.$t);
                     detalje.querySelector(".txt p").textContent = sko.gsx$pris.$t + ",-"; //skoens pris tilføjes til p-tag
