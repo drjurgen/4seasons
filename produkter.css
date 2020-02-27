@@ -265,6 +265,24 @@ footer p {
     }
 }
 
+.show_footer {
+    animation-name: show_footer_kf;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes show_footer_kf {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 /********************* ANIMATIONER SLUT *********************/
 
 
