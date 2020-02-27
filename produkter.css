@@ -215,19 +215,26 @@ nav .dropbtn:hover {
 }
 
 .logo img {
-    height: 50px;
-    width: 130px;
-    z-index: 10;
-    background-color: #fff;
+    height: 90px;
+    width: 90px;
 }
 
 footer {
-    width: 100%;
-    height: 80px;
+    max-width: 1000px;
+    min-height: 80px;
     display: flex;
     justify-content: center;
-    background-image: url(storbrick.svg);
+    align-items: center;
 
+    background-image: url(storbrick.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+footer p {
+    padding: 15px 20px;
+    font-weight: 600;
 }
 
 /***************** HEADER & FOOTER SLUT *****************/
@@ -288,6 +295,9 @@ footer {
         margin: 0 auto;
     }
 
+    footer p {
+        padding: 15px 30px;
+    }
 
 
 }

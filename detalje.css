@@ -69,8 +69,8 @@ nav .dropbtn:hover {
 }
 
 nav img {
-    height: 50px;
-    width: 130px;
+    height: 90px;
+    width: 90px;
 }
 
 footer {
@@ -122,7 +122,7 @@ footer {
     position: relative;
     top: 100px;
     mix-blend-mode: screen;
-    /*Dette er ligesom i photoshop. Derfor vælges screen, så der skabes en såkaldt "knockout-effect"*/
+    /*mix-blend-mode er ligesom i photoshop. Derfor vælges screen, så der skabes en såkaldt "knockout-effect"*/
 }
 
 #detalje .detalje-sko .sko-navn h1,
@@ -418,13 +418,13 @@ footer {
     }
 
     #detalje .detalje-sko .sko-navn h1 {
-        top: 38%;
+        top: 30%;
         font-size: 3.75rem;
     }
 
     #detalje .detalje-sko .sko-navn h2 {
         font-size: 1.75rem;
-        top: 40%;
+        top: 35%;
     }
 
     #detalje .detalje-sko .sko-navn {
@@ -433,10 +433,6 @@ footer {
 
     .buy {
         margin: 50px auto 20px auto;
-    }
-
-    #detalje .detalje-sko .sko-navn {
-        height: 17.5vh;
     }
 
 }
@@ -468,7 +464,7 @@ footer {
     }
 
     #detalje .detalje-sko .sko-navn h1 {
-        top: 20%;
+        top: 25%;
         font-size: 4.8rem;
     }
 
@@ -480,19 +476,23 @@ footer {
 
 
 @media screen and (min-width:1500px) {
+    #detalje {
+        grid-template-columns: repeat(auto-fill, minmax(750px, 1fr));
+    }
+
     #detalje .detalje-sko {
         background-size: cover;
         height: 100vh;
     }
 
     #detalje .detalje-sko .sko-navn h1 {
-        top: 14%;
+        top: 28%;
         font-size: 5.75rem;
     }
 
     #detalje .detalje-sko .sko-navn h2 {
         font-size: 3rem;
-        top: 40%;
+        top: 36%;
     }
 }
 
