@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landingpage</title>
-    <link rel="stylesheet" href="landingpage.css">
+    <title>Kontakt | Say Sneaks</title>
+    <link rel="stylesheet" href="kontakt.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <section id="landingpage">
+    <section id="kontakt">
         <header>
 
             <!--Navigationen indeholder en dropdownmenu med specificeret produkter-->
@@ -34,9 +34,14 @@
         <!--Sectionwrapper indeholder alt pånær navigation der vises på siden-->
         <!--Dette inkluderer slideshow + CTA knap-->
         <div class="sectionwrapper">
-            <div class="container">
-                <h1></h1>
-                <a href="produkter.html">SE PRODUKTER</a>
+            <div class="col">
+                <h1>Kontakt os</h1>
+                <p>Hos Saysneaks vil vi gerne give kunderne den bedste oplevelse. Derfor er I altid velkommen til at kontakte os på tlf: + 45 70 80 70 80 eller skrive en mail på info@saysneaks.dk</p>
+
+                <div class="mapouter">
+                    <div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=lygten%2016&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
+
+                </div>
             </div>
         </div>
     </section>
@@ -46,7 +51,6 @@
         const picture = document.querySelector(".sectionwrapper"); //Picture har browserens fulde bredde & højde og defineres derfor til senere brug
         const kønKnap = document.querySelectorAll(".gender"); //Der defineres variabel til vores filtrering af køn
 
-        let slideCounter = 0; //Vi definerer variablen "slideCounter" til at vise de forskellige billeder
         let køn; //Når der skal filtreres efter køn, så vælger vi at definere "køn" som start til at være lig "alle"
 
         //Når alle elementer i DOM'en er loadet, så skal funktionen "start" igangsættes
@@ -55,7 +59,6 @@
         //Denne funktion igangsættes, når al indhold i DOM'en er loadet
         function start() {
             console.log("start");
-            slideChange(); //Vi starter slideChange funktionen
 
             //for hver filtreringssmulighed skal der laves en eventlistener der udløser funktionen "kønFiltrering"
             kønKnap.forEach(knap => {
@@ -69,46 +72,6 @@
             console.log(køn);
             //Trykkes der på en af køn-knapperne så sendes man til produkter.html siden + det klikket køn
             location.href = `produkter.html?gender=${køn}`;
-        }
-
-        //slideChange skifter det billede der vises på landingpage-slideshowet
-        function slideChange() {
-            slideCounter++; //SlideCounter forøges med 1 og fortæller hvad
-
-            //picture's baggrundsbillede defineres som "slide" + slideCounter's nuværende værdi
-            picture.style.backgroundImage = "url(imgs/imageslide/slide" + slideCounter + ".jpg)";
-            picture.classList.add("show"); //Der tilføjes en animationsklasse, så billedet fader ind
-            console.log(slideCounter);
-
-            //Denne if-sætning kontrollerer positionen af baggrundsbilledet alt efter slideCounters nuværende værdi
-            if (slideCounter == 1) {
-                picture.style.backgroundPosition = "0% 90%";
-            } else if (slideCounter == 2) {
-                picture.style.backgroundPosition = "70% 60%";
-            } else if (slideCounter == 3) {
-                picture.style.backgroundPosition = "50% 80%";
-            } else if (slideCounter == 4) {
-                picture.style.backgroundPosition = "40% 100%";
-            } else if (slideCounter == 5) {
-                picture.style.backgroundPosition = "40% 60%";
-            } else if (slideCounter == 6) {
-                picture.style.backgroundPosition = "50% 100%";
-            } else if (slideCounter == 7) {
-                picture.style.backgroundPosition = "45% 95%";
-            } else if (slideCounter == 8) {
-                picture.style.backgroundPosition = "25% 90%";
-                slideCounter = 0; //Når slideCounter har nået max værdi af slides, så nulstilles den
-            }
-
-            //Når animationsklassen er færdig fjernes den
-            setTimeout(function() {
-                picture.classList.remove("show");
-            }, 1000);
-
-            //Når et billede har været fremme i 4 sekunder, så genkaldes funktionen
-            setTimeout(function() {
-                slideChange();
-            }, 4000);
         }
 
     </script>
