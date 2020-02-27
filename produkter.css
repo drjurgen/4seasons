@@ -142,14 +142,17 @@ button:focus {
     text-align: left;
     background-color: #fff;
     border: none;
-    border-bottom: 1px inset #333;
     cursor: pointer;
+    transition: .2s;
 
 }
 
 .dropdown-content button:hover {
     /* Change color of dropdown links on hover */
-    background-color: #ddd;
+    /*    background-color: #83D29D;*/
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
 }
 
 
